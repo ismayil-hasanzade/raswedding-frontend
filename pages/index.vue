@@ -229,8 +229,6 @@ const popularDresses = [
       height: max-content;
       padding: 20px 0;
       left: 0;
-      top: 35%;
-      bottom: 35%;
       background: rgba(0, 0, 0, 0.5);
       color: #f1f1f1;
       width: 100%;

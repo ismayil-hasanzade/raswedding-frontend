@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   app: {
     head: {
       title:'RAS Wedding - Xoşbəxtliyinizi bizimlə paylaşın',
@@ -31,6 +31,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
 
   devtools: { enabled: false },
-  css: ['bootstrap/dist/css/bootstrap.min.css', 'bootstrap-icons/font/bootstrap-icons.css',],
+  css: ['bootstrap/dist/css/bootstrap.min.css', 'bootstrap-icons/font/bootstrap-icons.css','@/assets/scss/_theme.scss'],
   plugins: ['@/plugins/bootstrap.client',]
 })

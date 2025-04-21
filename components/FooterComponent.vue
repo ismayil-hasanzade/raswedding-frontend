@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer class="bg-dark text-white py-4 ">
     <div class="container">
       <div class="row">
         <!-- Sol: logo və qısa məlumat -->
@@ -33,3 +33,13 @@
     </div>
   </footer>
 </template>
+<style scoped lang="scss">
+footer {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  background: #f8f4f0;
+  padding: 30px 0;
+  color: #333;
+}
+
+</style>
