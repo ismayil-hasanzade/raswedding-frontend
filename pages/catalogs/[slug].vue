@@ -1,11 +1,17 @@
 <template>
   <section class="product-detail py-5">
     <div class="container">
-      <div v-if="dress" class="row align-items-center g-5">
+      <div v-if="dress" class="row d-flex align-items-center">
         <!-- Şəkil -->
         <div class="col-md-6">
-          <div class="image-wrapper shadow rounded overflow-hidden">
-            <img :src="dress.image" :alt="dress.title" class="img-fluid w-100" />
+          <div
+              class="image-wrapper image_container shadow rounded overflow-hidden"
+              :style="{ backgroundImage: `url(${dress.image})` }"
+              @mousemove="handleZoom"
+              @mouseleave="resetZoom"
+          >
+
+<!--            <img :src="dress.image" :alt="dress.title" class="img-fluid w-100" />-->
           </div>
         </div>
 
@@ -33,7 +39,20 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const slug = route.params.slug
+const handleZoom = (e) => {
+  const target = e.target
+  const rect = target.getBoundingClientRect()
 
+  const x = ((e.clientX - rect.left) / rect.width) * 100
+  const y = ((e.clientY - rect.top) / rect.height) * 100
+
+  target.style.backgroundPosition = `${x}% ${y}%`
+}
+
+const resetZoom = e => {
+  const target = e.target
+  target.style.backgroundPosition = 'center'
+}
 const allDresses = [
   {
     title: 'Zərif Dantel Gəlinlik',
@@ -46,7 +65,7 @@ const allDresses = [
   {
     title: 'Minimal İpək Gəlinlik',
     description: 'Sadəliyin və zərifliyin təcəssümü.',
-    image: '/images/dress2.jpg',
+    image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'minimal-ipek',
     size: 'M, L',
     material: 'İpək'
@@ -54,7 +73,7 @@ const allDresses = [
   {
     title: 'Qollu A-Kəsim Model',
     description: 'Daha formal və möhtəşəm görüntü üçün.',
-    image: '/images/dress3.jpg',
+    image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'a-kesim',
     size: 'XS, S, M',
     material: 'Saten'
@@ -62,7 +81,7 @@ const allDresses = [
   {
     title: 'Tül və İşıltılı Detallar',
     description: 'Yumşaq tül və parlaq naxışlarla dizayn.',
-    image: '/images/dress4.jpg',
+    image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'tul-parlaq',
     size: 'S, M, L',
     material: 'Tül və Payet'
@@ -73,6 +92,25 @@ const dress = allDresses.find((item) => item.slug === slug)
 <style scoped>
   section{
     margin-top: 80px;
+  }
+  @media (max-width: 768px) {
+    .image_container {
+      background-size: cover !important;
+      background-position: center !important;
+      pointer-events: none;
+    }
+  }
+  .image_container {
+    height: 600px;
+    background-size: 100%;
+    background-position: center;
+    transition: background-position 0.5s ease;
+    cursor: zoom-in;
+    overflow: hidden;
+    width: 80%;
+    &:hover {
+      background-size: 160%;
+    }
   }
   .product-detail {
     font-family: 'Poppins', sans-serif;

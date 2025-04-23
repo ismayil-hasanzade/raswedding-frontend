@@ -1,15 +1,27 @@
 <template>
-  <div>
+  <div class="page-wrapper d-flex flex-column min-vh-100">
     <HeaderComponent />
-    <NuxtPage/>
+    <main class="flex-grow-1">
+      <NuxtPage />
+    </main>
     <FooterComponent />
   </div>
 </template>
+
 <script setup>
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 </script>
 <style lang="scss">
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex-grow: 1;
+  }
+}
   *{
     margin: 0;
     padding: 0;
@@ -40,10 +52,5 @@ import FooterComponent from '@/components/FooterComponent.vue'
     letter-spacing: 0.5px;
   }
 
-  // Footer
-  footer {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-  }
 
 </style>
