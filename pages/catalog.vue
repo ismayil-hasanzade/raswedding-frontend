@@ -71,7 +71,7 @@
                   <h5 class="card-title">{{ dress.title }}</h5>
                   <p class="card-text">{{ dress.description }}</p>
                   <NuxtLink
-                      :to="`/kataloq/${dress.slug}`"
+                      :to="`/catalogs/${dress.slug}`"
                       class="btn btn-outline-primary mt-auto"
                   >
                     Detallara Bax
@@ -148,6 +148,70 @@ const selectedSizes = ref([])
 const searchText = ref('')
 
 const allDresses = [
+  {
+    title: 'Zərif Dantel Gəlinlik',
+    description: 'Romantik və klassik dantel detallı model.',
+    image: '/images/1.jpeg',
+    slug: 'zerif-dantel',
+    size: ['S', 'M'],
+    material: 'Dantel'
+  },
+  {
+    title: 'Minimal İpək Gəlinlik',
+    description: 'Sadəliyin və zərifliyin təcəssümü.',
+    image: '/images/2.jpeg',
+    slug: 'minimal-ipek',
+    size: ['M', 'L'],
+    material: 'İpək'
+  },
+  {
+    title: 'Qollu A-Kəsim Model',
+    description: 'Daha formal və möhtəşəm görüntü üçün.',
+    image: '/images/3.jpeg',
+    slug: 'a-kesim',
+    size: ['XS', 'S', 'M'],
+    material: 'Saten'
+  },
+  {
+    title: 'Boho Tərzi Gəlinlik',
+    description: 'Azad və sadə ruhlu gəlinlər üçün.',
+    image: '/images/4.jpeg',
+    slug: 'boho-terzi',
+    size: ['M', 'L'],
+    material: 'Tül'
+  },
+  {
+    title: 'Zərif Dantel Gəlinlik',
+    description: 'Romantik və klassik dantel detallı model.',
+    image: '/images/1.jpeg',
+    slug: 'zerif-dantel',
+    size: ['S', 'M'],
+    material: 'Dantel'
+  },
+  {
+    title: 'Minimal İpək Gəlinlik',
+    description: 'Sadəliyin və zərifliyin təcəssümü.',
+    image: '/images/2.jpeg',
+    slug: 'minimal-ipek',
+    size: ['M', 'L'],
+    material: 'İpək'
+  },
+  {
+    title: 'Qollu A-Kəsim Model',
+    description: 'Daha formal və möhtəşəm görüntü üçün.',
+    image: '/images/3.jpeg',
+    slug: 'a-kesim',
+    size: ['XS', 'S', 'M'],
+    material: 'Saten'
+  },
+  {
+    title: 'Boho Tərzi Gəlinlik',
+    description: 'Azad və sadə ruhlu gəlinlər üçün.',
+    image: '/images/4.jpeg',
+    slug: 'boho-terzi',
+    size: ['M', 'L'],
+    material: 'Tül'
+  },
   {
     title: 'Zərif Dantel Gəlinlik',
     description: 'Romantik və klassik dantel detallı model.',
