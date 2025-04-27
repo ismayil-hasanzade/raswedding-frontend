@@ -20,7 +20,7 @@
           <h1 class="product-title mb-3">{{ dress.title }}</h1>
           <p class="product-desc mb-3">{{ dress.description }}</p>
           <p><strong>Material:</strong> {{ dress.material }}</p>
-          <p><strong>Ölçülər:</strong> {{ dress.size }}</p>
+          <p><strong>Ölçülər:</strong> {{ dress.sizes }}</p>
 
           <NuxtLink to="/contact" class="btn contact-btn mt-4">İcarə üçün Əlaqə Saxla</NuxtLink>
         </div>
@@ -60,7 +60,7 @@ const allDresses = [
     description: 'Romantik və klassik dantel detallı model.',
     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'zerif-dantel',
-    size: 'S, M, L',
+    sizes: 'S, M, L',
     id:1,
     material: 'Dantel və Tül'
   },

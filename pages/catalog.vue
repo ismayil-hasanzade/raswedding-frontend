@@ -40,13 +40,13 @@
             </div>
 
             <h6 class="fw-bold mt-4 mb-3">Ölçü</h6>
-            <div v-for="sz in sizes" :key="sz" class="form-check mb-2">
+            <div v-for="sz in sizess" :key="sz" class="form-check mb-2">
               <input
                   class="form-check-input"
                   type="checkbox"
-                  :id="`size-${sz}`"
+                  :id="`sizes-${sz}`"
                   :value="sz"
-                  v-model="selectedSizes"
+                  v-model="selectedsizess"
               />
               <label class="form-check-label" :for="`size-${sz}`">{{ sz }}</label>
             </div>

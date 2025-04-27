@@ -13,6 +13,9 @@ import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 </script>
 <style lang="scss">
+.first_section{
+  margin-top: 80px;
+}
 .detail-btn {
   background-color: #d4a373;
   color: #fff;
