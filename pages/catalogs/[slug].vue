@@ -20,7 +20,7 @@
           <h1 class="product-title mb-3">{{ dress.title }}</h1>
           <p class="product-desc mb-3">{{ dress.description }}</p>
           <p><strong>Material:</strong> {{ dress.material }}</p>
-          <p><strong>Ölçülər:</strong> {{ dress.size }}</p>
+          <p><strong>Ölçülər:</strong> {{ dress.sizes }}</p>
 
           <NuxtLink to="/contact" class="btn contact-btn mt-4">İcarə üçün Əlaqə Saxla</NuxtLink>
         </div>
@@ -34,11 +34,12 @@
 </template>
 
 
-<script setup>
+<script setup lang="ts">
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const slug = route.params.slug
+const id:number = route.params.slug
+
 const handleZoom = (e) => {
   const target = e.target
   const rect = target.getBoundingClientRect()
@@ -59,7 +60,8 @@ const allDresses = [
     description: 'Romantik və klassik dantel detallı model.',
     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'zerif-dantel',
-    size: 'S, M, L',
+    sizes: 'S, M, L',
+    id:1,
     material: 'Dantel və Tül'
   },
   {
@@ -68,6 +70,7 @@ const allDresses = [
     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'minimal-ipek',
     size: 'M, L',
+    id:2,
     material: 'İpək'
   },
   {
@@ -76,7 +79,8 @@ const allDresses = [
     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
     slug: 'a-kesim',
     size: 'XS, S, M',
-    material: 'Saten'
+    material: 'Saten',
+    id: 3
   },
   {
     title: 'Tül və İşıltılı Detallar',
@@ -87,7 +91,7 @@ const allDresses = [
     material: 'Tül və Payet'
   }
 ]
-const dress = allDresses.find((item) => item.slug === slug)
+const dress = allDresses.find((item) => item.id == id)
 </script>
 <style scoped>
   section{

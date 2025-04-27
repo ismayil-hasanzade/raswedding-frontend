@@ -13,6 +13,26 @@ import HeaderComponent from '@/components/HeaderComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
 </script>
 <style lang="scss">
+.first_section{
+  margin-top: 80px;
+}
+.detail-btn {
+  background-color: #d4a373;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #c28859;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
 .page-wrapper {
   display: flex;
   flex-direction: column;
