@@ -51,9 +51,9 @@
               <label class="form-check-label" :for="`size-${sz}`">{{ sz }}</label>
             </div>
 
-            <button class="btn btn-outline-danger mt-3" @click="resetFilters">
-              Filterləri Təmizlə
-            </button>
+<!--            <button class="btn resetbtn btn-outline-danger" @click="resetFilters">-->
+<!--              Sıfırla-->
+<!--            </button>-->
           </div>
         </div>
 
@@ -71,8 +71,8 @@
                   <h5 class="card-title">{{ dress.title }}</h5>
                   <p class="card-text">{{ dress.description }}</p>
                   <NuxtLink
-                      :to="`/catalogs/${dress.slug}`"
-                      class="btn btn-outline-primary mt-auto"
+                      :to="`/catalogs/${dress.id}`"
+                      class="btn detail-btn mt-auto"
                   >
                     Detallara Bax
                   </NuxtLink>
@@ -149,6 +149,7 @@ const searchText = ref('')
 
 const allDresses = [
   {
+    id:1,
     title: 'Zərif Dantel Gəlinlik',
     description: 'Romantik və klassik dantel detallı model.',
     image: '/images/1.jpeg',
@@ -157,6 +158,7 @@ const allDresses = [
     material: 'Dantel'
   },
   {
+    id:2,
     title: 'Minimal İpək Gəlinlik',
     description: 'Sadəliyin və zərifliyin təcəssümü.',
     image: '/images/2.jpeg',
@@ -326,6 +328,11 @@ section {
     background: rgba(0, 0, 0, 0.4);
     z-index: 1050;
   }
+}
+.resetbtn{
+  //position: absolute;
+  right: 4px;
+  top: 35px;
 }
 
 // Animation
