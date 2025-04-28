@@ -40,13 +40,13 @@
             </div>
 
             <h6 class="fw-bold mt-4 mb-3">Ölçü</h6>
-            <div v-for="sz in sizess" :key="sz" class="form-check mb-2">
+            <div v-for="sz in sizes" :key="sz" class="form-check mb-2">
               <input
                   class="form-check-input"
                   type="checkbox"
                   :id="`sizes-${sz}`"
                   :value="sz"
-                  v-model="selectedsizess"
+                  v-model="selectedSizes"
               />
               <label class="form-check-label" :for="`size-${sz}`">{{ sz }}</label>
             </div>
@@ -71,7 +71,7 @@
                   <h5 class="card-title">{{ dress.title }}</h5>
                   <p class="card-text">{{ dress.description }}</p>
                   <NuxtLink
-                      :to="`/catalogs/${dress.id}`"
+                      :to="`/catalogs/${dress._id}`"
                       class="btn detail-btn mt-auto"
                   >
                     Detallara Bax
@@ -139,7 +139,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import {ref, computed, onMounted} from 'vue'
 
 const isFilterOpen = ref(false)
 const visibleCount = ref(8)
@@ -147,114 +147,15 @@ const selectedMaterials = ref([])
 const selectedSizes = ref([])
 const searchText = ref('')
 
-const allDresses = [
-  {
-    id:1,
-    title: 'Zərif Dantel Gəlinlik',
-    description: 'Romantik və klassik dantel detallı model.',
-    image: '/images/1.jpeg',
-    slug: 'zerif-dantel',
-    size: ['S', 'M'],
-    material: 'Dantel'
-  },
-  {
-    id:2,
-    title: 'Minimal İpək Gəlinlik',
-    description: 'Sadəliyin və zərifliyin təcəssümü.',
-    image: '/images/2.jpeg',
-    slug: 'minimal-ipek',
-    size: ['M', 'L'],
-    material: 'İpək'
-  },
-  {
-    title: 'Qollu A-Kəsim Model',
-    description: 'Daha formal və möhtəşəm görüntü üçün.',
-    image: '/images/3.jpeg',
-    slug: 'a-kesim',
-    size: ['XS', 'S', 'M'],
-    material: 'Saten'
-  },
-  {
-    title: 'Boho Tərzi Gəlinlik',
-    description: 'Azad və sadə ruhlu gəlinlər üçün.',
-    image: '/images/4.jpeg',
-    slug: 'boho-terzi',
-    size: ['M', 'L'],
-    material: 'Tül'
-  },
-  {
-    title: 'Zərif Dantel Gəlinlik',
-    description: 'Romantik və klassik dantel detallı model.',
-    image: '/images/1.jpeg',
-    slug: 'zerif-dantel',
-    size: ['S', 'M'],
-    material: 'Dantel'
-  },
-  {
-    title: 'Minimal İpək Gəlinlik',
-    description: 'Sadəliyin və zərifliyin təcəssümü.',
-    image: '/images/2.jpeg',
-    slug: 'minimal-ipek',
-    size: ['M', 'L'],
-    material: 'İpək'
-  },
-  {
-    title: 'Qollu A-Kəsim Model',
-    description: 'Daha formal və möhtəşəm görüntü üçün.',
-    image: '/images/3.jpeg',
-    slug: 'a-kesim',
-    size: ['XS', 'S', 'M'],
-    material: 'Saten'
-  },
-  {
-    title: 'Boho Tərzi Gəlinlik',
-    description: 'Azad və sadə ruhlu gəlinlər üçün.',
-    image: '/images/4.jpeg',
-    slug: 'boho-terzi',
-    size: ['M', 'L'],
-    material: 'Tül'
-  },
-  {
-    title: 'Zərif Dantel Gəlinlik',
-    description: 'Romantik və klassik dantel detallı model.',
-    image: '/images/1.jpeg',
-    slug: 'zerif-dantel',
-    size: ['S', 'M'],
-    material: 'Dantel'
-  },
-  {
-    title: 'Minimal İpək Gəlinlik',
-    description: 'Sadəliyin və zərifliyin təcəssümü.',
-    image: '/images/2.jpeg',
-    slug: 'minimal-ipek',
-    size: ['M', 'L'],
-    material: 'İpək'
-  },
-  {
-    title: 'Qollu A-Kəsim Model',
-    description: 'Daha formal və möhtəşəm görüntü üçün.',
-    image: '/images/3.jpeg',
-    slug: 'a-kesim',
-    size: ['XS', 'S', 'M'],
-    material: 'Saten'
-  },
-  {
-    title: 'Boho Tərzi Gəlinlik',
-    description: 'Azad və sadə ruhlu gəlinlər üçün.',
-    image: '/images/4.jpeg',
-    slug: 'boho-terzi',
-    size: ['M', 'L'],
-    material: 'Tül'
-  }
-]
+const allDresses = ref([])
 
-const materials = [...new Set(allDresses.map(d => d.material))]
-const sizes = [...new Set(allDresses.flatMap(d => d.size))]
+const materials = ref([])
+const sizes = ref([])
 
 const filteredDresses = computed(() =>
-    allDresses.filter(d =>
+    allDresses.value.filter(d =>
         (!selectedMaterials.value.length || selectedMaterials.value.includes(d.material)) &&
-        (!selectedSizes.value.length || d.size.some(size => selectedSizes.value.includes(size))) &&
+        (!selectedSizes.value.length || d.sizes.some(size => selectedSizes.value.includes(size))) &&
         (
             d.title.toLowerCase().includes(searchText.value.toLowerCase()) ||
             d.description.toLowerCase().includes(searchText.value.toLowerCase())
@@ -277,6 +178,23 @@ const resetFilters = () => {
   visibleCount.value = 8
   isFilterOpen.value = false
 }
+
+const fetchDresses = async () => {
+  try {
+    const response = await fetch('http://localhost:5001/api/dresses')
+    const data = await response.json()
+    console.log(data)
+    allDresses.value = data
+    // 🔥 Materials və sizes burada set edilir
+    materials.value = [...new Set(data.map(d => d.material))]
+    sizes.value = [...new Set(data.flatMap(d => d.sizes))]
+    console.log('Fetched Dresses:', allDresses.value)
+  } catch (error) {
+    console.error('Error fetching dresses:', error)
+  }
+}
+
+onMounted(fetchDresses)
 </script>
 
 <style scoped lang="scss">

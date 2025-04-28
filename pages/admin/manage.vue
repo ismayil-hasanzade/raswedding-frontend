@@ -26,7 +26,7 @@
             <div class="card h-100 shadow-sm">
               <img
                   v-if="dress.image"
-                  :src="getImageUrl(dress.image)"
+                  :src="dress.image"
                   class="card-img-top"
                   alt="Gəlinlik şəkli"
                   style="height: 300px; object-fit: cover;"
@@ -67,20 +67,43 @@ definePageMeta({
   layout: 'admin',
   middleware: 'auth'
 })
+import Swal from 'sweetalert2'
 import { ref, computed, onMounted } from 'vue'
 
 const dresses = ref([])
 const loading = ref(true)
 const searchText = ref('')
 
-// Şəkil URL düzəldən funksiya
-const getImageUrl = (path) => {
-  if (path.startsWith('/uploads')) {
-    return `http://localhost:5001${path}`
-  }
-  return path
-}
 
+const deleteDress = async (id) => {
+  const result = await Swal.fire({
+    title: 'Əminsiniz?',
+    text: "Bu gəlinliyi silmək istəyirsiniz?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Bəli, sil!',
+    cancelButtonText: 'Xeyr'
+  })
+
+  if (result.isConfirmed) {
+    try {
+      const res = await fetch(`http://localhost:5001/api/dresses/${id}`, {
+        method: 'DELETE'
+      })
+      if (res.ok) {
+        dresses.value = dresses.value.filter(dress => dress._id !== id)
+        Swal.fire('Silindi!', 'Gəlinlik uğurla silindi ✅', 'success')
+      } else {
+        Swal.fire('Xəta!', 'Silinərkən xəta baş verdi ❌', 'error')
+      }
+    } catch (error) {
+      console.error('Silinmə zamanı xəta:', error)
+      Swal.fire('Xəta!', 'Serverdə problem oldu ❌', 'error')
+    }
+  }
+}
 // Axtarış üçün computed
 const filteredDresses = computed(() => {
   if (!searchText.value.trim()) {
@@ -100,25 +123,6 @@ const fetchDresses = async () => {
     console.error('Server xətası:', error)
   } finally {
     loading.value = false
-  }
-}
-
-const deleteDress = async (id) => {
-  if (!confirm('Bu gəlinliyi silmək istədiyinizə əminsiniz?')) return
-
-  try {
-    const res = await fetch(`http://localhost:5001/api/dresses/${id}`, {
-      method: 'DELETE'
-    })
-
-    if (res.ok) {
-      dresses.value = dresses.value.filter(dress => dress._id !== id)
-      alert('Gəlinlik uğurla silindi ✅')
-    } else {
-      alert('Silinərkən xəta baş verdi ❌')
-    }
-  } catch (error) {
-    console.error('Silinmə zamanı xəta:', error)
   }
 }
 

@@ -34,7 +34,7 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ dress.title }}</h5>
               <p class="card-text">{{ dress.description }}</p>
-              <NuxtLink :to="`/catalogs/${dress.id}`" class="btn detail-btn mt-auto">
+              <NuxtLink :to="`/catalogs/${dress._id}`" class="btn detail-btn mt-auto">
                 Detallara Bax
               </NuxtLink>
             </div>

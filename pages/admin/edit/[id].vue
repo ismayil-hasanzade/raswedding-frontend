@@ -2,7 +2,6 @@
   <section class="py-5 first_section">
     <div class="container">
       <h2 class="text-center mb-4">Gəlinlik Redaktəsi</h2>
-
       <form class="row g-4" enctype="multipart/form-data">
         <div class="col-md-6">
           <label for="title" class="form-label">Başlıq</label>
@@ -23,7 +22,7 @@
         <div class="col-md-6">
           <label for="image" class="form-label">Şəkil</label>
           <div v-if="form.image" class="mb-2">
-            <img :src="getImageUrl(form.image)" class="img-fluid rounded" alt="Cari şəkil"
+            <img :src="form.image" class="img-fluid rounded" alt="Cari şəkil"
                  style="height:200px; object-fit:cover;"/>
           </div>
           <input @change="handleFileChange" ref="fileInputRef" type="file" accept="image/*" class="form-control"
@@ -65,18 +64,15 @@ definePageMeta({
   layout: 'admin',
   middleware: 'auth'
 })
+import Swal from 'sweetalert2'
 import {ref, onMounted} from 'vue'
 import {useRoute, useRouter} from 'vue-router'
-
 const route = useRoute()
 const router = useRouter()
-
 const id = route.params.id
 const loading = ref(true)
 const fileInputRef = ref(null)
-
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-
 const form = ref({
   title: '',
   description: '',
@@ -92,13 +88,6 @@ const isValid = ref({
   image: true,
   sizes: true
 })
-
-const getImageUrl = (path) => {
-  if (path.startsWith('/uploads')) {
-    return `http://localhost:5001${path}`
-  }
-  return path
-}
 
 const handleFileChange = (e) => {
   form.value.newImage = e.target.files[0]
@@ -124,11 +113,12 @@ const fetchDress = async () => {
   }
 }
 
+
 const submitForm = async () => {
   const keys = Object.keys(isValid.value)
   let valid = true
   keys.forEach(key => {
-    if (key !== 'image') { // editdə şəkil məcburi deyil
+    if (key !== 'image') {
       isValid.value[key] = form.value[key] !== '' && form.value[key] !== null
     }
     if (key === 'sizes' && (!form.value.sizes || !form.value.sizes.length)) {
@@ -142,9 +132,8 @@ const submitForm = async () => {
   formData.append('title', form.value.title)
   formData.append('description', form.value.description)
   formData.append('material', form.value.material)
-  formData.append('popularity', form.value.popularity)
+  formData.append('popularity', form.value.popularity ? 'true' : 'false')
   form.value.sizes.forEach(size => formData.append('sizes', size))
-
   if (form.value.newImage) {
     formData.append('image', form.value.newImage)
   }
@@ -155,13 +144,32 @@ const submitForm = async () => {
       body: formData
     })
     if (res.ok) {
-      alert('Gəlinlik uğurla yeniləndi ✅')
+      const data = await res.json()
+
+      // Əvəzedici alert deyil, modern SweetAlert2 göstər
+      await Swal.fire({
+        icon: 'success',
+        title: 'Uğurlu!',
+        text: data.message || 'Gəlinlik uğurla yeniləndi ✅',
+        timer: 2000,
+        showConfirmButton: false
+      })
+
       await router.push('/admin/manage')
     } else {
-      alert('Yeniləmə zamanı xəta baş verdi ❌')
+      await Swal.fire({
+        icon: 'error',
+        title: 'Xəta!',
+        text: 'Yeniləmə zamanı xəta baş verdi ❌',
+      })
     }
   } catch (error) {
     console.error('Server xətası:', error)
+    await Swal.fire({
+      icon: 'error',
+      title: 'Xəta!',
+      text: 'Server xətası baş verdi ❌',
+    })
   }
 }
 
