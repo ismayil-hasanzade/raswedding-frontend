@@ -4,7 +4,7 @@
       <video v-if="heroData.video" :src="heroData.video" autoplay muted  type="video/mp4" loop id="myVideo">
       </video>
       <div class="content">
-        <h1 class="text-center">{{heroData?.content1}}</h1>
+        <h1 class="text-center">{{heroData.content1}}</h1>
         <p class="lead mb-4">{{heroData.content2}}</p>
         <NuxtLink to="/catalog" class="btn btn-light btn-lg px-4">Gəlinliklərə Bax</NuxtLink>
       </div>
@@ -13,7 +13,7 @@
   <section id="PopularProducts" class="py-5 bg-light">
     <div class="container">
       <h2 class="text-center mb-4">Populyar Gəlinliklər</h2>
-      <Swiper :space-between="20" :breakpoints="{320: { slidesPerView: 1 },576: { slidesPerView: 2 },768: { slidesPerView: 2 },992: { slidesPerView: 2 },1200: { slidesPerView: 3 }}"
+      <Swiper :space-between="20" :breakpoints="{200: { slidesPerView: 1 },576: { slidesPerView: 2 },768: { slidesPerView: 2 },992: { slidesPerView: 2 },1200: { slidesPerView: 3 }}"
           :loop="false"
           :modules="modules"
           :navigation="true"
@@ -41,14 +41,12 @@
           </div>
         </SwiperSlide>
       </Swiper>
-
     </div>
   </section>
   <section id="how-it-works" class="py-5">
     <div class="container">
       <h2 class="text-center mb-5">İcarə Necə İşləyir?</h2>
       <div class="row text-center g-4">
-        <!-- Addım 1 -->
         <div class="col-md-4">
           <div class="icon-step mb-3">
             <i class="bi bi-search-heart-fill"></i>
@@ -56,8 +54,6 @@
           <h5 class="fw-bold">1. Gəlinliyi Seç</h5>
           <p>Seçimlərini kataloqdan incələ və ürəyincə olan modeli tap.</p>
         </div>
-
-        <!-- Addım 2 -->
         <div class="col-md-4">
           <div class="icon-step mb-3">
             <i class="bi bi-whatsapp"></i>
@@ -65,8 +61,6 @@
           <h5 class="fw-bold">2. Əlaqə Saxla</h5>
           <p>WhatsApp və ya əlaqə forması ilə bizə müraciət et.</p>
         </div>
-
-        <!-- Addım 3 -->
         <div class="col-md-4">
           <div class="icon-step mb-3">
             <i class="bi bi-gift-fill"></i>
@@ -88,6 +82,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 const modules = [Navigation, Scrollbar, Pagination, Autoplay]
+const config = useRuntimeConfig()
 const heroData = ref({
   video: '',
   content1: '',
@@ -112,12 +107,12 @@ const resetZoom = (e) => {
 
 const fetchHeroAndPopular = async () => {
   try {
-    const heroRes = await fetch('http://localhost:5001/api/hero')
+    const heroRes = await fetch(`${config.public.apiBaseUrl}/hero`)
     const hero = await heroRes.json()
     if (hero) {
       heroData.value = hero
     }
-    const popularRes = await fetch('http://localhost:5001/api/dresses/popular')
+    const popularRes = await fetch(`${config.public.apiBaseUrl}/dresses/popular`)
     const popular = await popularRes.json()
     if (popular && Array.isArray(popular)) {
       popularDresses.value = popular
@@ -131,6 +126,15 @@ onMounted(fetchHeroAndPopular)
 </script>
 
 <style scoped lang="scss">
+.hero-section{
+  .content{
+    @media (max-width: 768px) {
+     h1{
+       font-size: 2rem;
+     }
+    }
+  }
+}
 #PopularProducts{
   @media (max-width: 768px) {
     .image_container {
@@ -178,7 +182,6 @@ onMounted(fetchHeroAndPopular)
     top: 45%;
     bottom: 45%;
     display: block;
-    //color: #d4a373;
     color: white;
     z-index: 10;
   }
@@ -198,7 +201,6 @@ onMounted(fetchHeroAndPopular)
   .container {
     #myVideo {
       object-fit: cover;
-      //border: 1px solid red;
       position: absolute;
       right: 0;
       bottom: 0;

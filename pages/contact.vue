@@ -51,8 +51,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { TheMask } from 'vue-the-mask'
-
 const form = ref({
   name: '',
   phone: '',

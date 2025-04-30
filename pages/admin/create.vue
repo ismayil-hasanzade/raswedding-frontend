@@ -60,7 +60,7 @@ import {ref} from 'vue'
 import Swal from 'sweetalert2'
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 const fileInputRef = ref(null)
-
+const config = useRuntimeConfig();
 const form = ref({
   title: '',
   description: '',
@@ -76,12 +76,9 @@ const isValid = ref({
   image: true,
   sizes: true
 })
-
 const handleFileChange = (e) => {
   form.value.image = e.target.files[0]
 }
-
-
 const submitForm = async () => {
   const keys = Object.keys(isValid.value)
   let valid = true
@@ -96,7 +93,6 @@ const submitForm = async () => {
     valid = valid && isValid.value[key];
   })
   if (!valid) return;
-
   const formData = new FormData()
   formData.append('title', form.value.title)
   formData.append('description', form.value.description)
@@ -104,15 +100,13 @@ const submitForm = async () => {
   formData.append('popularity', form.value.popularity ? 'true' : 'false')
   form.value.sizes.forEach(size => formData.append('sizes', size))
   formData.append('image', form.value.image)
-
   try {
-    const res = await fetch('http://localhost:5001/api/dresses', {
+    const res = await fetch(`${config.public.apiBaseUrl}/dresses`, {
       method: 'POST',
       body: formData
     })
     if (res.ok) {
       const data = await res.json()
-
       await Swal.fire({
         icon: 'success',
         title: 'Uğurlu!',
@@ -120,8 +114,6 @@ const submitForm = async () => {
         timer: 2000,
         showConfirmButton: false
       })
-
-      // Formu sıfırla
       fileInputRef.value.value = null
       form.value = {title: '', description: '', material: '', image: null, sizes: [], popularity: false}
     } else {

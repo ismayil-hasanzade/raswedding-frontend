@@ -73,6 +73,8 @@ const id = route.params.id
 const loading = ref(true)
 const fileInputRef = ref(null)
 const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+const config = useRuntimeConfig()
+
 const form = ref({
   title: '',
   description: '',
@@ -96,7 +98,7 @@ const handleFileChange = (e) => {
 const fetchDress = async () => {
   loading.value = true
   try {
-    const res = await fetch(`http://localhost:5001/api/dresses/${id}`)
+    const res = await fetch(`${config.public.apiBaseUrl}/dresses/${id}`)
     const data = await res.json()
     form.value = {
       title: data.title,
@@ -139,7 +141,7 @@ const submitForm = async () => {
   }
 
   try {
-    const res = await fetch(`http://localhost:5001/api/dresses/${id}`, {
+    const res = await fetch(`${config.public.apiBaseUrl}/dresses/${id}`, {
       method: 'PUT',
       body: formData
     })

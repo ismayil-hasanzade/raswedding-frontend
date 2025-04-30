@@ -69,7 +69,7 @@ definePageMeta({
 })
 import Swal from 'sweetalert2'
 import { ref, computed, onMounted } from 'vue'
-
+const config = useRuntimeConfig();
 const dresses = ref([])
 const loading = ref(true)
 const searchText = ref('')
@@ -89,7 +89,7 @@ const deleteDress = async (id) => {
 
   if (result.isConfirmed) {
     try {
-      const res = await fetch(`http://localhost:5001/api/dresses/${id}`, {
+      const res = await fetch(`${config.public.apiBaseUrl}/dresses/${id}`, {
         method: 'DELETE'
       })
       if (res.ok) {
@@ -117,7 +117,7 @@ const filteredDresses = computed(() => {
 const fetchDresses = async () => {
   loading.value = true
   try {
-    const res = await fetch('http://localhost:5001/api/dresses')
+    const res = await fetch(`${config.public.apiBaseUrl}/dresses`)
     dresses.value = await res.json()
   } catch (error) {
     console.error('Server xətası:', error)

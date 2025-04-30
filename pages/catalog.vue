@@ -146,7 +146,7 @@ const visibleCount = ref(8)
 const selectedMaterials = ref([])
 const selectedSizes = ref([])
 const searchText = ref('')
-
+const config = useRuntimeConfig();
 const allDresses = ref([])
 
 const materials = ref([])
@@ -181,7 +181,7 @@ const resetFilters = () => {
 
 const fetchDresses = async () => {
   try {
-    const response = await fetch('http://localhost:5001/api/dresses')
+    const response = await fetch(`${config.public.apiBaseUrl}/dresses`)
     const data = await response.json()
     console.log(data)
     allDresses.value = data

@@ -2,31 +2,25 @@
   <section class="py-5">
     <div class="container">
       <h2 class="text-center mb-4">Hero Məlumatlarını İdarə Et</h2>
-
       <div v-if="loading" class="text-center">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Yüklənir...</span>
         </div>
       </div>
-
       <div v-else>
         <form @submit.prevent="submitForm" class="row g-4" enctype="multipart/form-data">
           <div class="col-12">
             <label class="form-label">Video Seç</label>
             <input @change="handleFileChange" ref="fileInput" type="file" accept="video/*" class="form-control" />
           </div>
-
           <div class="col-12">
             <label class="form-label">Başlıq 1</label>
             <input v-model="form.content1" type="text" class="form-control" />
           </div>
-
           <div class="col-12">
             <label class="form-label">Başlıq 2</label>
             <input v-model="form.content2" type="text" class="form-control" />
           </div>
-
-          <!-- Progress Bar -->
           <div v-if="progress > 0" class="col-12">
             <div class="progress" style="height: 20px;">
               <div
@@ -41,17 +35,14 @@
               </div>
             </div>
           </div>
-
           <div class="col-12 text-center mt-3">
             <button type="submit" class="btn btn-success px-5 py-2">
               {{ formHasData ? 'Yadda saxla (Yenilə)' : 'Yadda saxla (Əlavə et)' }}
             </button>
           </div>
         </form>
-
-        <!-- Video Preview -->
         <div v-if="form.video && typeof form.video === 'string'" class="mt-4 text-center">
-          <video controls width="400" :src="getVideoUrl(form.video)"></video>
+          <video controls width="400" :src="form.video"></video>
         </div>
       </div>
     </div>
@@ -72,7 +63,7 @@ const form = ref({
   content1: '',
   content2: ''
 })
-
+const config = useRuntimeConfig();
 const loading = ref(true)
 const fileInput = ref(null)
 const progress = ref(0)
@@ -81,7 +72,7 @@ const formHasData = ref(false)  // 🔥 Yoxlayacağıq Hero mövcuddurmu
 const fetchHero = async () => {
   loading.value = true
   try {
-    const res = await fetch('http://localhost:5001/api/hero')
+    const res = await fetch(`${config.public.apiBaseUrl}/hero`)
     const data = await res.json()
     if (data && (data.content1 || data.content2 || data.video)) {
       form.value.video = data.video
@@ -113,7 +104,7 @@ const submitForm = async () => {
   try {
     const res = await axios({
       method: formHasData.value ? 'put' : 'post',   // 🔥 PUT və ya POST seçirik
-      url: 'http://localhost:5001/api/hero',
+      url: `${config.public.apiBaseUrl}/hero`,
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -153,13 +144,5 @@ const submitForm = async () => {
     progress.value = 0
   }
 }
-
-const getVideoUrl = (path) => {
-  if (path.startsWith('/uploads')) {
-    return `http://localhost:5001${path}`
-  }
-  return path
-}
-
 onMounted(fetchHero)
 </script>
