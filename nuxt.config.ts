@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   ssr: true,
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:5001/api'
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL
     }
   },
   app: {
@@ -19,6 +19,7 @@ export default defineNuxtConfig({
       ],
 
       link: [
+        { rel: 'icon', type: 'image/png', href: '/images/rel.jpg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {

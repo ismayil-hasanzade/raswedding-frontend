@@ -1,16 +1,21 @@
 <template>
-  <section class="py-5">
+  <section class="contact-section py-5">
     <div class="container">
-      <h1 class="text-center mb-4">Bizimlə Əlaqə</h1>
-      <div class="row g-4">
-        <!-- Əlaqə məlumatları -->
-        <div class="col-md-6">
-          <h5>Əlaqə Məlumatları</h5>
-          <p><strong>Ünvan:</strong> Bakı, Nərimanov r., Fətəli Xan Xoyski küç.</p>
-          <p><strong>Telefon:</strong> <a href="tel:+99451487668">📞 +994 51 487 68 68</a></p>
-          <p><strong>Email:</strong> <a href="mailto:info@gelinlik.az">info@gelinlik.az</a></p>
-          <p><strong>Instagram:</strong> <a href="https://www.instagram.com/raswedding_/" target="_blank">@raswedding_</a></p>
-          <div class="ratio ratio-4x3 mt-3">
+      <h1 class="text-center mb-5">Bizimlə Əlaqə</h1>
+
+      <div class="row g-5">
+        <!-- Sol tərəf: Əlaqə və xəritə -->
+        <div class="col-lg-5">
+          <div class="contact-info mb-4">
+            <h5>Əlaqə Məlumatları</h5>
+            <p><strong>Ünvan:</strong> Bakı, Nərimanov r., Fətəli Xan Xoyski küç.</p>
+            <p><strong>Telefon:</strong> <a href="tel:+99451487668">📞 +994 51 487 68 68</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@gelinlik.az">info@gelinlik.az</a></p>
+            <p><strong>Instagram:</strong> <a href="https://www.instagram.com/raswedding_/" target="_blank">@raswedding_</a></p>
+          </div>
+
+          <!-- Xəritə -->
+          <div class="ratio ratio-4x3 rounded shadow-sm">
             <iframe
                 src="https://maps.google.com/maps?q=baku%20azerbaijan&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 allowfullscreen
@@ -19,24 +24,24 @@
             ></iframe>
           </div>
         </div>
-        <!-- Əlaqə forması -->
-        <div class="col-md-6">
+
+        <!-- Sağ tərəf: Form -->
+        <div class="col-lg-7">
           <h5>Form vasitəsilə müraciət edin</h5>
           <form @submit.prevent="submitForm">
             <div class="mb-3">
               <label class="form-label">Ad və Soyad</label>
-              <input v-model="form.name" :class="{'is-invalid' : !isValid.name}" type="text" class="form-control"/>
+              <input v-model="form.name" :class="{'is-invalid': !isValid.name}" type="text" class="form-control" />
             </div>
             <div class="mb-3">
               <label class="form-label">Telefon</label>
-              <input v-model="form.phone" v-mask="'+994 ## ### ## ##'" :class="{'is-invalid' : !isValid.phone}" class="form-control"/>
+              <input v-model="form.phone" v-mask="'+994 ## ### ## ##'" :class="{'is-invalid': !isValid.phone}" class="form-control" />
             </div>
             <div class="mb-3">
               <label class="form-label">Mesaj</label>
-              <textarea v-model="form.message" rows="4" :class="{'is-invalid':!isValid.message}"
-                        class="form-control"></textarea>
+              <textarea v-model="form.message" rows="4" :class="{'is-invalid': !isValid.message}" class="form-control"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Göndər</button>
+            <button type="submit" class="btn btn-primary w-100">Göndər</button>
           </form>
         </div>
       </div>
@@ -45,14 +50,13 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import {TheMask} from "vue-the-mask";
-
+import { ref } from 'vue'
 const form = ref({
   name: '',
   phone: '',
   message: ''
 })
+
 const isValid = ref({
   name: true,
   phone: true,
@@ -64,7 +68,7 @@ const submitForm = async () => {
   let valid = true
   keys.forEach(key => {
     isValid.value[key] = form.value[key].trim() !== '' && form.value[key] !== null;
-    if (key==='phone') {
+    if (key === 'phone') {
       isValid.value[key] = form.value[key].length === 17;
     }
     valid = valid && isValid.value[key];
@@ -72,25 +76,15 @@ const submitForm = async () => {
 
   if (!valid) return;
 
-  // API çağırışı üçün hazır
-  // await fetch('/api/contact', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(form.value)
-  // })
-
+  // API çağırışı yerinə hazırda sadəcə alert
   alert(`Təşəkkür edirik, ${form.value.name}! Müraciətiniz göndərildi.`)
 
-  form.value = {
-    name: '',
-    phone: '',
-    message: ''
-  }
+  form.value = { name: '', phone: '', message: '' }
 }
-
 </script>
+
 <style scoped lang="scss">
-section {
+.contact-section {
   margin-top: 80px;
   font-family: 'Poppins', sans-serif;
 
@@ -125,10 +119,9 @@ section {
     border: 1px solid red !important;
   }
 
-  .btn {
+  .btn-primary {
     background-color: #d4a373;
     border: none;
-    color: white;
     font-weight: 500;
     padding: 0.6rem 1.4rem;
     border-radius: 8px;
@@ -146,5 +139,4 @@ section {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   }
 }
-
 </style>

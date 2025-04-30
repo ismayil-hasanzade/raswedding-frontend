@@ -8,6 +8,7 @@
       <div class="d-flex align-items-center gap-4">
         <nav>
           <ul class="list-unstyled d-flex gap-4 mb-0">
+            <li><NuxtLink to="/admin/hero-manage" class="text-dark text-decoration-none">Ana Sehife</NuxtLink></li>
             <li><NuxtLink to="/admin/manage" class="text-dark text-decoration-none">Gəlinliklər</NuxtLink></li>
             <li><NuxtLink to="/admin/create" class="text-dark text-decoration-none">Yeni Əlavə Et</NuxtLink></li>
           </ul>

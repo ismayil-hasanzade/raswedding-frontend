@@ -1,12 +1,11 @@
 <template>
-  <section class="hero-section text-white d-flex align-items-center justify-content-center">
+  <section class="hero-section text-white d-flex align-items-center justify-content-center first_section">
     <div class="container text-center d-flex align-items-center justify-content-center">
-      <video class="" autoplay muted loop id="myVideo">
-        <source src="../public/videos/new.mp4" type="video/mp4">
+      <video v-if="heroData.video" :src="heroData.video" autoplay muted  type="video/mp4" loop id="myVideo">
       </video>
       <div class="content">
-        <h1 class="text-center">Sizin Xəyallarınız Bizim Tasarımlarımızda</h1>
-        <p class="lead mb-4">Ən gözəl gününüz üçün ən gözəl seçimlər.</p>
+        <h1 class="text-center">{{heroData.content1}}</h1>
+        <p class="lead mb-4">{{heroData.content2}}</p>
         <NuxtLink to="/catalog" class="btn btn-light btn-lg px-4">Gəlinliklərə Bax</NuxtLink>
       </div>
     </div>
@@ -14,15 +13,7 @@
   <section id="PopularProducts" class="py-5 bg-light">
     <div class="container">
       <h2 class="text-center mb-4">Populyar Gəlinliklər</h2>
-      <Swiper
-          :space-between="20"
-          :breakpoints="{
-          320: { slidesPerView: 1 },
-          576: { slidesPerView: 2 },
-          768: { slidesPerView: 2 },
-          992: { slidesPerView: 2 },
-          1200: { slidesPerView: 3 }
-        }"
+      <Swiper :space-between="20" :breakpoints="{200: { slidesPerView: 1 },576: { slidesPerView: 2 },768: { slidesPerView: 2 },992: { slidesPerView: 2 },1200: { slidesPerView: 3 }}"
           :loop="false"
           :modules="modules"
           :navigation="true"
@@ -43,21 +34,19 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ dress.title }}</h5>
               <p class="card-text">{{ dress.description }}</p>
-              <NuxtLink :to="`/catalogs/${dress.slug}`" class="btn detail-btn mt-auto">
+              <NuxtLink :to="`/catalogs/${dress._id}`" class="btn detail-btn mt-auto">
                 Detallara Bax
               </NuxtLink>
             </div>
           </div>
         </SwiperSlide>
       </Swiper>
-
     </div>
   </section>
   <section id="how-it-works" class="py-5">
     <div class="container">
       <h2 class="text-center mb-5">İcarə Necə İşləyir?</h2>
       <div class="row text-center g-4">
-        <!-- Addım 1 -->
         <div class="col-md-4">
           <div class="icon-step mb-3">
             <i class="bi bi-search-heart-fill"></i>
@@ -65,8 +54,6 @@
           <h5 class="fw-bold">1. Gəlinliyi Seç</h5>
           <p>Seçimlərini kataloqdan incələ və ürəyincə olan modeli tap.</p>
         </div>
-
-        <!-- Addım 2 -->
         <div class="col-md-4">
           <div class="icon-step mb-3">
             <i class="bi bi-whatsapp"></i>
@@ -74,8 +61,6 @@
           <h5 class="fw-bold">2. Əlaqə Saxla</h5>
           <p>WhatsApp və ya əlaqə forması ilə bizə müraciət et.</p>
         </div>
-
-        <!-- Addım 3 -->
         <div class="col-md-4">
           <div class="icon-step mb-3">
             <i class="bi bi-gift-fill"></i>
@@ -90,12 +75,20 @@
 
 </template>
 <script setup>
-import {Swiper, SwiperSlide} from 'swiper/vue'
+import { ref, onMounted } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import {Autoplay, Navigation, Pagination, Scrollbar} from "swiper/modules";
-const modules = [Navigation, Scrollbar, Pagination, Autoplay];
+import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper/modules'
+const modules = [Navigation, Scrollbar, Pagination, Autoplay]
+const config = useRuntimeConfig()
+const heroData = ref({
+  video: '',
+  content1: '',
+  content2: ''
+})
+const popularDresses = ref([])
 
 const handleZoom = (e) => {
   const target = e.target
@@ -107,46 +100,41 @@ const handleZoom = (e) => {
   target.style.backgroundPosition = `${x}% ${y}%`
 }
 
-const resetZoom = e => {
+const resetZoom = (e) => {
   const target = e.target
   target.style.backgroundPosition = 'center'
 }
-const popularDresses = [
-  {
-    title: 'Zərif Dantel Gəlinlik',
-    description: 'Romantik və klassik dantel detallı model.',
-    image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
-    slug: 'zerif-dantel'
-  },
-  {
-    title: 'Minimal İpək Gəlinlik',
-    description: 'Sadəliyin və zərifliyin təcəssümü.',
-     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
-    slug: 'minimal-ipek'
-  },
-  {
-    title: 'Qollu A-Kəsim Model',
-    description: 'Daha formal və möhtəşəm görüntü üçün.',
-     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
-    slug: 'a-kesim'
-  },
-  {
-    title: 'Tül və İşıltılı Detallar',
-    description: 'Yumşaq tül və parlaq naxışlarla dizayn.',
-     image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
-    slug: 'tul-parlaq'
-  },
-  {
-    title: 'Tül və İşıltılı Detallar',
-    description: 'Yumşaq tül və parlaq naxışlarla dizayn.',
-    image: '/images/481075489_122145455762455318_200917837088695722_n.jpeg',
-    slug: 'tul-parlaq'
-  }
 
-]
+const fetchHeroAndPopular = async () => {
+  try {
+    const heroRes = await fetch(`${config.public.apiBaseUrl}/hero`)
+    const hero = await heroRes.json()
+    if (hero) {
+      heroData.value = hero
+    }
+    const popularRes = await fetch(`${config.public.apiBaseUrl}/dresses/popular`)
+    const popular = await popularRes.json()
+    if (popular && Array.isArray(popular)) {
+      popularDresses.value = popular
+    }
+  } catch (error) {
+    console.error('API məlumatı yüklənərkən xəta:', error)
+  }
+}
+
+onMounted(fetchHeroAndPopular)
 </script>
 
 <style scoped lang="scss">
+.hero-section{
+  .content{
+    @media (max-width: 768px) {
+     h1{
+       font-size: 2rem;
+     }
+    }
+  }
+}
 #PopularProducts{
   @media (max-width: 768px) {
     .image_container {
@@ -194,7 +182,6 @@ const popularDresses = [
     top: 45%;
     bottom: 45%;
     display: block;
-    //color: #d4a373;
     color: white;
     z-index: 10;
   }
@@ -214,7 +201,6 @@ const popularDresses = [
   .container {
     #myVideo {
       object-fit: cover;
-      //border: 1px solid red;
       position: absolute;
       right: 0;
       bottom: 0;

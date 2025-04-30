@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-dark text-white py-4 ">
+  <footer class="bg-dark text-white py-4">
     <div class="container">
       <div class="row">
         <!-- Sol: logo və qısa məlumat -->
@@ -18,12 +18,25 @@
           </ul>
         </div>
 
-        <!-- Sağ: Əlaqə -->
+        <!-- Sağ: Əlaqə və Sosial -->
         <div class="col-md-4 mb-3">
           <h6>Əlaqə</h6>
-          <p class="mb-1">📍 Bakı, Azərbaycan</p>
-          <p class="mb-1">📞 +994 50 123 45 67</p>
-          <p class="mb-0">📧 info@gelinlik.az</p>
+          <p class="mb-1">📍 Əlicabbar Orucəliyev 75, Baku, Azerbaijan 1000</p>
+          <p class="mb-1">📞 +994 51 487 68 68</p>
+          <p class="mb-3">📧 info@gelinlik.az</p>
+
+          <!-- Sosial media -->
+          <div class="d-flex gap-3 social-icons">
+            <a href="https://www.instagram.com/raswedding_" target="_blank" class="text-white fs-4">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://wa.me/+994514876868" target="_blank" class="text-white fs-4">
+              <i class="bi bi-whatsapp"></i>
+            </a>
+            <a href="https://www.tiktok.com/@raswedding" target="_blank" class="text-white fs-4">
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -33,6 +46,7 @@
     </div>
   </footer>
 </template>
+
 <style scoped lang="scss">
 footer {
   font-family: 'Poppins', sans-serif;
@@ -40,6 +54,15 @@ footer {
   background: #f8f4f0;
   padding: 30px 0;
   color: #333;
-}
 
+  .social-icons {
+    a {
+      transition: all 0.3s ease;
+      &:hover {
+        color: #d4a373;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
 </style>
