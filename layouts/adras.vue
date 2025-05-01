@@ -27,8 +27,8 @@ const isReady = ref(false)
 onMounted(() => {
   const token = localStorage.getItem('admin_token')
 
-  if (!token && route.path !== '/adras/login') {
-    router.push('/adras/login')
+  if (!token && route.path !== '/admin/login') {
+    router.push('/admin/login')
   } else {
     isReady.value = true
   }

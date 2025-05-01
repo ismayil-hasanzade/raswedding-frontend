@@ -8,7 +8,7 @@
         <div class="col-lg-5">
           <div class="contact-info mb-4">
             <h5>Əlaqə Məlumatları</h5>
-            <p><strong>Ünvan:</strong> Bakı, Nərimanov r., Fətəli Xan Xoyski küç.</p>
+            <p><strong>Ünvan:</strong> Mikayıl Rəfili Küçəsi</p>
             <p><strong>Telefon:</strong> <a href="tel:+99451487668">📞 +994 51 487 68 68</a></p>
             <p><strong>Email:</strong> <a href="mailto:info@gelinlik.az">info@gelinlik.az</a></p>
             <p><strong>Instagram:</strong> <a href="https://www.instagram.com/raswedding_/" target="_blank">@raswedding_</a></p>
@@ -17,11 +17,12 @@
           <!-- Xəritə -->
           <div class="ratio ratio-4x3 rounded shadow-sm">
             <iframe
-                src="https://maps.google.com/maps?q=baku%20azerbaijan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3039.155098824573!2d49.846194999999994!3d40.383255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDDCsDIyJzU5LjciTiA0OcKwNTAnNDYuMyJF!5e0!3m2!1str!2saz!4v1746119909644!5m2!1str!2saz"
                 allowfullscreen
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
+
           </div>
         </div>
 
@@ -84,6 +85,16 @@ const submitForm = async () => {
 </script>
 
 <style scoped lang="scss">
+a{
+  color: #d4a373;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #c28859;
+    text-decoration: underline;
+  }
+}
 .contact-section {
   margin-top: 80px;
   font-family: 'Poppins', sans-serif;
