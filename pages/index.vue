@@ -6,7 +6,7 @@
       <div class="content">
         <h1 class="text-center">{{heroData.content1}}</h1>
         <p class="lead mb-4">{{heroData.content2}}</p>
-        <NuxtLink to="/catalog" class="btn detail-btn btn-light btn-lg px-4">Gəlinliklərə Bax</NuxtLink>
+        <NuxtLink to="/catalog" class="btn btn-light btn-lg px-4">Gəlinliklərə Bax</NuxtLink>
       </div>
     </div>
   </section>

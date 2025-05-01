@@ -1,16 +1,16 @@
 <template>
   <header class="admin-header bg-light shadow-sm py-3 mb-4">
     <div class="container d-flex justify-content-between align-items-center">
-      <NuxtLink to="/adras" class="fw-bold text-dark text-decoration-none fs-4">
+      <NuxtLink to="/admin" class="fw-bold text-dark text-decoration-none fs-4">
         Admin Panel
       </NuxtLink>
 
       <div class="d-flex align-items-center gap-4">
         <nav>
           <ul class="list-unstyled d-flex gap-4 mb-0">
-            <li><NuxtLink to="/adras/hero-manage" class="text-dark text-decoration-none">Ana Sehife</NuxtLink></li>
-            <li><NuxtLink to="/adras/manage" class="text-dark text-decoration-none">Gəlinliklər</NuxtLink></li>
-            <li><NuxtLink to="/adras/create" class="text-dark text-decoration-none">Yeni Əlavə Et</NuxtLink></li>
+            <li><NuxtLink to="/admin/hero-manage" class="text-dark text-decoration-none">Ana Sehife</NuxtLink></li>
+            <li><NuxtLink to="/admin/manage" class="text-dark text-decoration-none">Gəlinliklər</NuxtLink></li>
+            <li><NuxtLink to="/admin/create" class="text-dark text-decoration-none">Yeni Əlavə Et</NuxtLink></li>
           </ul>
         </nav>
         <button @click="logout" class="btn btn-outline-danger btn-sm">Çıxış</button>
