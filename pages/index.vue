@@ -1,7 +1,7 @@
 <template>
   <section class="hero-section text-white d-flex align-items-center justify-content-center first_section">
     <div class="container text-center d-flex align-items-center justify-content-center">
-      <video v-if="heroData.video" :src="heroData.video" autoplay muted  type="video/mp4" loop id="myVideo">
+      <video v-if="heroData.video" :src="heroData.video" autoplay muted playsinline  type="video/mp4" loop id="myVideo">
       </video>
       <div class="content">
         <h1 class="text-center">{{heroData.content1}}</h1>
@@ -23,7 +23,7 @@
           class="pb-4"
       >
         <SwiperSlide v-for="(dress, index) in popularDresses" :key="index">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 shadow-sm h-">
             <div
                 class="image_container"
                 :style="{ backgroundImage: `url(${dress.image})` }"
@@ -126,17 +126,31 @@ onMounted(fetchHeroAndPopular)
 </script>
 
 <style scoped lang="scss">
+@media (max-width: 768px) {
 .hero-section{
   .content{
-    @media (max-width: 768px) {
      h1{
        font-size: 2rem;
      }
     }
+    //.container{
+    //  position: relative;
+    //  width: 100%;
+    //  height: 500px;
+    //  background-color: red;
+    //  video{
+    //
+    //  }
+    //}
   }
 }
 #PopularProducts{
   @media (max-width: 768px) {
+    .container{
+      .card{
+        height: 500px!important;
+      }
+    }
     .image_container {
       background-size: cover !important;
       background-position: center !important;

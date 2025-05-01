@@ -1,20 +1,15 @@
 <template>
   <header class="header border-bottom shadow-sm position-fixed w-100 bg-white z-3 top-0">
     <div class="container d-flex justify-content-between align-items-center py-2">
-      <!-- Yalnız logo -->
       <NuxtLink to="/" class="d-flex align-items-center">
         <img class="logo" src="/images/PDF.svg" alt="Logo"/>
       </NuxtLink>
-
-      <!-- Hamburger icon (mobil) -->
       <button
           class="d-md-none border-0 bg-transparent fs-3"
           @click="isMobileMenuOpen = !isMobileMenuOpen"
       >
         <i class="bi" :class="isMobileMenuOpen ? 'bi-x-lg' : 'bi-list'"></i>
       </button>
-
-      <!-- Naviqasiya -->
       <nav class="d-none d-md-block">
         <ul class="list-unstyled d-flex gap-4 mb-0">
           <li>
@@ -67,7 +62,7 @@ const closeMenu = () => {
 
   .logo {
     height: auto;
-    width: 150px;
+    width: 190px;
     object-fit: contain;
   }
 

@@ -2,13 +2,10 @@
   <footer class="bg-dark text-white py-4">
     <div class="container">
       <div class="row">
-        <!-- Sol: logo və qısa məlumat -->
         <div class="col-md-4 mb-3">
-          <h5 class="fw-bold">Ras Wedding</h5>
-          <p class="small">Ən gözəl gününüz üçün xəyalınızdakı gəlinliyi bizdən kiralayın.</p>
+          <img src="/public/images/logo.png" alt="footer-logo" class="mb-3 footer-logo"/>
+<!--          <p class="small">Ən gözəl gününüz üçün xəyalınızdakı gəlinliyi bizdən kiralayın.</p>-->
         </div>
-
-        <!-- Orta: Naviqasiya -->
         <div class="col-md-4 mb-3">
           <h6>Keçidlər</h6>
           <ul class="list-unstyled">
@@ -17,15 +14,11 @@
             <li><NuxtLink to="/contact" class="text-white text-decoration-none">Əlaqə</NuxtLink></li>
           </ul>
         </div>
-
-        <!-- Sağ: Əlaqə və Sosial -->
         <div class="col-md-4 mb-3">
           <h6>Əlaqə</h6>
           <p class="mb-1">📍 Əlicabbar Orucəliyev 75, Baku, Azerbaijan 1000</p>
           <p class="mb-1">📞 +994 51 487 68 68</p>
-          <p class="mb-3">📧 info@gelinlik.az</p>
-
-          <!-- Sosial media -->
+<!--          <p class="mb-3">📧 info@gelinlik.az</p>-->
           <div class="d-flex gap-3 social-icons">
             <a href="https://www.instagram.com/raswedding_" target="_blank" class="text-white fs-4">
               <i class="bi bi-instagram"></i>
@@ -33,7 +26,7 @@
             <a href="https://wa.me/+994514876868" target="_blank" class="text-white fs-4">
               <i class="bi bi-whatsapp"></i>
             </a>
-            <a href="https://www.tiktok.com/@raswedding" target="_blank" class="text-white fs-4">
+            <a href="https://www.tiktok.com/@raswedding_" target="_blank" class="text-white fs-4">
               <i class="bi bi-tiktok"></i>
             </a>
           </div>
@@ -41,7 +34,7 @@
       </div>
 
       <div class="text-center mt-4 small">
-        © {{ new Date().getFullYear() }} raswedding.az – Bütün hüquqlar qorunur.
+        © {{ new Date().getFullYear() }} raswedding.az – Created By Ismayil Hasanzade
       </div>
     </div>
   </footer>
@@ -54,14 +47,26 @@ footer {
   background: #f8f4f0;
   padding: 30px 0;
   color: #333;
-
+.footer-logo {
+    width: 200px;
+    height: auto;
+  }
   .social-icons {
+    margin-top: 20px;
     a {
       transition: all 0.3s ease;
       &:hover {
         color: #d4a373;
         transform: translateY(-2px);
       }
+    }
+  }
+}
+@media (max-width: 768px) {
+  footer {
+    //display: flex;
+    .footer-logo {
+      width: 150px;
     }
   }
 }

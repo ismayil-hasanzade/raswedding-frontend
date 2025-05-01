@@ -17,7 +17,6 @@ export default defineNuxtConfig({
               "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
         },
       ],
-
       link: [
         { rel: 'icon', type: 'image/png', href: '/images/rel.jpg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
