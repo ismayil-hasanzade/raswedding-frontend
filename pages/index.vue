@@ -128,12 +128,7 @@ onMounted(fetchHeroAndPopular)
 <style scoped lang="scss">
 @media (max-width: 768px) {
 .hero-section{
-  height: 60vh!important;
   .content{
-    .btn{
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-    }
      h1{
        font-size: 2rem;
      }
