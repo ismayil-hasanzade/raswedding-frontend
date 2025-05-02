@@ -127,24 +127,6 @@ onMounted(fetchHeroAndPopular)
 </script>
 
 <style scoped lang="scss">
-@media (max-width: 768px) {
-.hero-section{
-  .content{
-     h1{
-       font-size: 2rem;
-     }
-    }
-    //.container{
-    //  position: relative;
-    //  width: 100%;
-    //  height: 500px;
-    //  background-color: red;
-    //  video{
-    //
-    //  }
-    //}
-  }
-}
 #PopularProducts{
   @media (max-width: 768px) {
     .container{
@@ -254,6 +236,20 @@ onMounted(fetchHeroAndPopular)
   p {
     font-family: 'Poppins', sans-serif;
     color: #555;
+  }
+}
+@media (max-width: 768px) {
+  .hero-section{
+    .detail-btn{
+      font-size: 0.8rem;
+      padding: 0.7rem 1rem;
+    }
+    height: 60vh;
+    .content{
+      h1{
+        font-size: 2rem;
+      }
+    }
   }
 }
 
