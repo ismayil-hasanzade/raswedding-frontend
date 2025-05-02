@@ -6,7 +6,7 @@
       <div class="content">
         <h1 class="text-center">{{heroData.content1}}</h1>
         <p class="lead mb-4">{{heroData.content2}}</p>
-        <NuxtLink to="/catalog" class="btn btn-light btn-lg px-4">Gəlinliklərə Bax</NuxtLink>
+        <NuxtLink to="/catalog" class="btn detail-btn btn-light btn-lg px-4">Gəlinliklərə Bax</NuxtLink>
       </div>
     </div>
   </section>
@@ -82,7 +82,8 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Autoplay, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 const modules = [Navigation, Scrollbar, Pagination, Autoplay]
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
+
 const heroData = ref({
   video: '',
   content1: '',
@@ -196,7 +197,7 @@ onMounted(fetchHeroAndPopular)
     top: 45%;
     bottom: 45%;
     display: block;
-    color: white;
+    color: black;
     z-index: 10;
   }
 

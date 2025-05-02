@@ -70,13 +70,7 @@ section {
   margin-top: 80px;
 }
 
-@media (max-width: 768px) {
-  .image_container {
-    background-size: cover !important;
-    background-position: center !important;
-    pointer-events: none;
-  }
-}
+
 
 .image_container {
   height: 600px;
@@ -125,6 +119,24 @@ section {
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
+  }
+}
+@media (max-width: 500px) {
+  section {
+    margin-top: 60px;
+  }
+  .product-detail{
+    .image-wrapper{
+      max-height: 400px;
+      width: 100%;
+    }
+  }
+
+
+  .image_container {
+    background-size: cover !important;
+    background-position: center !important;
+    pointer-events: none;
   }
 }
 
