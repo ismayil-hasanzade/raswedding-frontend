@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <h6>Əlaqə</h6>
-          <p class="mb-1">📍 Əlicabbar Orucəliyev 75, Baku, Azerbaijan 1000</p>
+          <p class="mb-1">📍 Bakı, Mikayıl Rəfili küç.</p>
           <p class="mb-1">📞 +994 51 487 68 68</p>
 <!--          <p class="mb-3">📧 info@gelinlik.az</p>-->
           <div class="d-flex gap-3 social-icons">

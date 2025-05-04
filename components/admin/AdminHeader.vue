@@ -10,9 +10,9 @@
         ☰
       </button>
 
-      <div class="d-flex align-items-center gap-4 flex-wrap justify-content-between w-100 mt-3 d-md-flex" :class="{'d-none': !menuOpen && isMobile}">
-        <nav class="w-100 w-md-auto">
-          <ul class="list-unstyled d-flex flex-column flex-md-row gap-3 mb-0">
+      <div class="d-flex d-md-column align-items-center gap-4 flex-wrap justify-content-between w-100 mt-3 d-md-flex" :class="{'d-none': !menuOpen && isMobile}">
+        <nav class=" w-md-auto">
+          <ul class="list-unstyled d-flex justify-content-center flex-column flex-md-row gap-3 mb-0">
             <li><NuxtLink to="/admin/hero-manage" class="text-dark text-decoration-none">Ana Səhifə</NuxtLink></li>
             <li><NuxtLink to="/admin/manage" class="text-dark text-decoration-none">Gəlinliklər</NuxtLink></li>
             <li><NuxtLink to="/admin/create" class="text-dark text-decoration-none">Yeni Əlavə Et</NuxtLink></li>
@@ -80,8 +80,18 @@ const logout = () => {
   ul {
     padding-left: 0;
   }
+  @media (max-width: 600px) {
+    .d-md-column{
+      flex-direction: column!important;
+    }
+    nav{
+      width: 100%;
+    }
+
+  }
 
   @media (min-width: 768px) {
+
     .d-md-flex {
       display: flex !important;
     }
